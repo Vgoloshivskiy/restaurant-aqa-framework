@@ -76,6 +76,27 @@ Publish your work in your own public Git repository (the link is the deliverable
 
 `aqa-quality.yml` runs on every push and pull request; `aqa-tests.yml` (nightly and on demand) tests whatever those variables point at. Never put credentials in the repository, in `.env.example` or in test code.
 
+## Added testing scenario
+
+Implemented UI coverage for **Group pre-order participants** (`Features/GroupPreOrder.feature`, `@ui` scenarios):
+
+- Owner creates a group pre-order and opens participants view.
+- Guests join through invitation links and add dishes.
+- Owner verifies participant list, participant dish/quantity details, per-participant subtotals, and consolidated total.
+- Total recalculation is checked after a guest cart change.
+- Visibility of unconfirmed and empty-cart participants is checked.
+- Empty-participants case is checked (no guests joined).
+
+Main implementation is in:
+
+- `StepDefinitions/ViewingGroupPre_OrderParticipantsStepDefinitions.cs`
+
+Run only this feature class:
+
+```bash
+dotnet run --no-build -- --treenode-filter "/*/*/*/*[TypeName=Restaurant_Aqa_Framework.Features.ViewingGroupPre_OrderParticipantsFeature]"
+```
+
 ## Presetup instructions
 
 This framework contains PlaywriteInstaller script so you don't need to setup it manually.
